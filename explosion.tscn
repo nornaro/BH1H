@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://q3yy4rmsfpbe"]
+
+[ext_resource type="Texture2D" uid="uid://c284rablyv61p" path="res://explosion.png" id="1_q7epf"]
+
+[node name="Explosion" type="TextureRect"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_q7epf")

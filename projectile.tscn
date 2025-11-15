@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://by7ch21ym5nxx"]
+
+[ext_resource type="Texture2D" uid="uid://dy7f2knn4hv6e" path="res://projectile.png" id="1_a85iw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q6r6c"]
+radius = 30.016663
+
+[node name="Projectile" type="TextureRect"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_a85iw")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(31, 31)
+shape = SubResource("CircleShape2D_q6r6c")

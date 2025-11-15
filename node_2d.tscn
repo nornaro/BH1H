@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://bi3yb25uviln4"]
+
+[ext_resource type="Script" uid="uid://sk0xldmfjeup" path="res://BH1H.gd" id="1_wtcfe"]
+[ext_resource type="PackedScene" uid="uid://bs58rvj18kf25" path="res://player.tscn" id="2_0e48y"]
+
+[sub_resource type="Gradient" id="Gradient_0e48y"]
+offsets = PackedFloat32Array(0.72316384, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_epypp"]
+noise_type = 4
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0hol4"]
+noise = SubResource("FastNoiseLite_epypp")
+color_ramp = SubResource("Gradient_0e48y")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q6r6c"]
+texture = SubResource("NoiseTexture2D_0hol4")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_epypp"]
+size = Vector2(1093, 40)
+
+[node name="Node2D" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_q6r6c")
+script = ExtResource("1_wtcfe")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("2_0e48y")]
+unique_name_in_owner = true
+layout_mode = 0
+
+[node name="Spawn" type="Area2D" parent="."]
+position = Vector2(600, 0)
+
+[node name="SpawnShape" type="CollisionShape2D" parent="Spawn"]
+unique_name_in_owner = true
+position = Vector2(0, 21)
+shape = SubResource("RectangleShape2D_epypp")
+
+[node name="Timer" type="Timer" parent="Spawn"]
+wait_time = 0.1
+autostart = true
+
+[node name="GO" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+offset_left = 2.9999998
+offset_top = 190.99998
+offset_right = 118.299995
+offset_bottom = 213.99998
+scale = Vector2(10, 10)
+text = "Game over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="timeout" from="Spawn/Timer" to="." method="_on_timer_timeout"]
